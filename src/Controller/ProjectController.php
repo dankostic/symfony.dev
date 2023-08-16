@@ -2,17 +2,15 @@
 
 namespace App\Controller;
 
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProjectController extends AbstractController
+class ProjectController extends AbstractFOSRestController
 {
-    #[Route('/', name: 'app_project')]
-    public function index(): Response
+    public function getProjectsAction()
     {
-        return $this->render('project/index.html.twig', [
-            'controller_name' => 'ProjectController',
-        ]);
+
     }
 }
