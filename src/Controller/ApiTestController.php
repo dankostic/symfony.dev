@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiController extends AbstractController
+class ApiTestController extends AbstractController
 {
     private const CREATED = 'Created successfully';
     private const UPDATED = 'Updated successfully';
@@ -23,7 +23,7 @@ class ApiController extends AbstractController
     ) {
     }
 
-    #[Route('/api-test', name: 'app_api')]
+    #[Route('/api-test', name: 'app_api_test')]
     public function index(): Response
     {
         $articles = $this->articleRepository->findAll();
@@ -35,7 +35,7 @@ class ApiController extends AbstractController
         );
     }
 
-    #[Route('/api-test/create', name: 'app_api_create', methods: 'POST')]
+    #[Route('/api-test/create', name: 'app_api_test_create', methods: 'POST')]
     public function create(Request $request): Response
     {
         $parameters = json_decode($request->getContent());
@@ -52,7 +52,7 @@ class ApiController extends AbstractController
         ]);
     }
 
-    #[Route('/api-test/update/{id}', name: 'app_api_update', methods: 'PUT')]
+    #[Route('/api-test/update/{id}', name: 'app_api_test_update', methods: 'PUT')]
     public function update(Request $request, int $id): Response
     {
         $article = $this->articleRepository->find($id);
@@ -71,7 +71,7 @@ class ApiController extends AbstractController
         ]);
     }
 
-    #[Route('/api-test/delete/{id}', name: 'app_api_delete', methods: 'DELETE')]
+    #[Route('/api-test/delete/{id}', name: 'app_api_test_delete', methods: 'DELETE')]
     public function delete(int $id): Response
     {
         $article = $this->articleRepository->find($id);
