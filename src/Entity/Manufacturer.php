@@ -3,24 +3,35 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity]
 /** A manufacturer */
 #[ApiResource]
 class Manufacturer
 {
-    # id of the manufacturer
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private ?int $id = null;
 
     /** name of the manufacturer */
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private string $name = '';
 
     /** description of the manufacturer */
+    #[ORM\Column(type: Types::TEXT)]
+
     private string $description = '';
 
     /** countryCode of the manufacturer */
+    #[ORM\Column(type: Types::STRING, length: 3)]
+
     private string $countryCode = '';
 
     /** dateTime of the manufacturer */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $listedTime = null;
 
     /**
