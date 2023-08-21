@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,6 +15,7 @@ class Manufacturer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    /** id of the product */
     private ?int $id = null;
 
     /** name of the manufacturer */
@@ -33,6 +35,15 @@ class Manufacturer
     /** dateTime of the manufacturer */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $listedTime = null;
+
+    #[ORM\OneToMany(mappedBy: 'manufacturer', targetEntity: Product::class, cascade: ['persist', 'remove'])]
+    /** @var Product[] of the manufacturer */
+    private iterable $products;
+
+    private function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -107,10 +118,10 @@ class Manufacturer
     }
 
     /**
-     * @param int|null $id
+     * @return iterable
      */
-    public function setId(?int $id): void
+    public function getProducts(): iterable
     {
-        $this->id = $id;
+        return $this->products;
     }
 }
