@@ -11,7 +11,10 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity]
 /** A manufacturer */
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: ['get', 'post'],
+    itemOperations: ['get', 'put', 'patch']
+)]
 class Manufacturer
 {
     #[ORM\Id]
