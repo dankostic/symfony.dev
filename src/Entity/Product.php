@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 /** A Product */
@@ -18,23 +19,27 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotNull]
     /** mpn of the product */
     private ?string $mpn = null;
 
     /** name of the product */
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
     private string $name = '';
 
     /** description of the product */
     #[ORM\Column(type: Types::TEXT)]
-
+    #[Assert\NotBlank]
     private string $description = '';
 
     /** issueDate of the product */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\NotNull]
     private ?\DateTimeInterface $issueDate = null;
 
     #[ORM\ManyToOne(targetEntity: Manufacturer::class, inversedBy: 'products')]
+    #[Assert\NotNull]
     /** manufacturer of the product */
     private ?Manufacturer $manufacturer = null;
 

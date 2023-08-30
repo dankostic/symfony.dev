@@ -6,6 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity]
 /** A manufacturer */
@@ -20,27 +22,29 @@ class Manufacturer
 
     /** name of the manufacturer */
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[NotBlank]
     private string $name = '';
 
     /** description of the manufacturer */
     #[ORM\Column(type: Types::TEXT)]
-
+    #[NotBlank]
     private string $description = '';
 
     /** countryCode of the manufacturer */
     #[ORM\Column(type: Types::STRING, length: 3)]
-
+    #[NotBlank]
     private string $countryCode = '';
 
     /** dateTime of the manufacturer */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[NotNull]
     private ?\DateTimeInterface $listedTime = null;
 
     #[ORM\OneToMany(mappedBy: 'manufacturer', targetEntity: Product::class, cascade: ['persist', 'remove'])]
     /** @var Product[] of the manufacturer */
     private iterable $products;
 
-    private function __construct()
+    public function __construct()
     {
         $this->products = new ArrayCollection();
     }
