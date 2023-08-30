@@ -13,7 +13,8 @@ use Symfony\Component\Validator\Constraints\NotNull;
 /** A manufacturer */
 #[ApiResource(
     collectionOperations: ['get', 'post'],
-    itemOperations: ['get', 'put', 'patch']
+    itemOperations: ['get', 'put', 'patch'],
+    attributes: ["pagination_items_per_page" => 3]
 )]
 class Manufacturer
 {
