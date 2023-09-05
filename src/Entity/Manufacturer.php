@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
@@ -26,7 +27,10 @@ class Manufacturer
 
     /** name of the manufacturer */
     #[ORM\Column(type: Types::STRING, length: 255)]
-    #[NotBlank]
+    #[
+        NotBlank,
+        Groups(['product.read'])
+    ]
     private string $name = '';
 
     /** description of the manufacturer */
