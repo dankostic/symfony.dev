@@ -70,14 +70,14 @@ class Product
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[
         Assert\NotNull,
-        Groups(['product.read'])
+        Groups(['product.read', 'product.write'])
     ]
     private ?\DateTimeInterface $issueDate = null;
 
     #[ORM\ManyToOne(targetEntity: Manufacturer::class, inversedBy: 'products')]
     #[
         Assert\NotNull,
-        Groups(['product.read'])
+        Groups(['product.read', 'product.write'])
     ]
     /** manufacturer of the product */
     private ?Manufacturer $manufacturer = null;
