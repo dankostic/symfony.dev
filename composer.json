@@ -42,6 +42,7 @@
         "hautelook/alice-bundle": "^2.12",
         "justinrainbow/json-schema": "^5.2",
         "phpunit/phpunit": "^10.3",
+        "symfony/browser-kit": "5.4.*",
         "symfony/http-client": "5.4",
         "symfony/maker-bundle": "^1.50",
         "symfony/web-server-bundle": "^4.4"
